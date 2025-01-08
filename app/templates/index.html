@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="blogs-section">
+    <header class="section-header">
+        <h1 class="section-title">All Blogs</h1>
+    </header>
+    
+    <div class="blog-grid">
+        {% for blog in blogs %}
+        <article class="blog-card">
+            <div class="blog-card-content">
+                <h2 class="blog-card-title">
+                    <a href="{{ url_for('page.single_blog', blog_id=blog['id']) }}" class="blog-card-link">
+                        {{ blog['title'] }}
+                    </a>
+                </h2>
+                <p class="blog-card-excerpt">
+                    {{ blog['content']|truncate(150, true, '...') }}
+                </p>
+                <div class="blog-card-footer">
+                    <a href="{{ url_for('page.single_blog', blog_id=blog['id']) }}" class="read-more">
+                        Read More
+                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('page.index', page=page-1) }}" class="pagination-link">&laquo; Previous</a>
+        {% endif %}
+        
+        {% for p in range(1, total_pages + 1) %}
+        <a href="{{ url_for('page.index', page=p) }}" class="pagination-link {% if p == page %}active{% endif %}">
+            {{ p }}
+        </a>
+        {% endfor %}
+        
+        {% if page < total_pages %}
+        <a href="{{ url_for('page.index', page=page+1) }}" class="pagination-link">Next &raquo;</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

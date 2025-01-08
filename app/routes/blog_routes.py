@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-from app.models import BlogPost, db
+from flask import Blueprint, request, jsonify, render_template
+from app.models import BlogPost, db, User
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 blog_bp = Blueprint('blog', __name__)
@@ -11,13 +11,21 @@ def get_posts():
     per_page = 5
     posts = BlogPost.query.paginate(
         page=page, per_page=per_page, error_out=False)
-    return jsonify([{"id": post.id, "title": post.title, "content": post.content} for post in posts.items])
+
+    return jsonify({
+        "blogs": [{"id": post.id, "title": post.title, "content": post.content, "created_at": post.created_at, "author_id": post.author_id} for post in posts.items],
+        "current_page": posts.page,
+        "total_pages": posts.pages,
+        "per_page": posts.per_page,
+        "total_items": posts.total
+    })
 
 
 @blog_bp.route('/<int:post_id>', methods=['GET'])
 def get_post(post_id):
     post = BlogPost.query.get_or_404(post_id)
-    return jsonify({"id": post.id, "title": post.title, "content": post.content})
+    author_name = User.query.get(post.author_id).username
+    return jsonify({"id": post.id, "title": post.title, "content": post.content, "created_at": post.created_at, "author_name": author_name})
 
 
 @blog_bp.route('/', methods=['POST'])

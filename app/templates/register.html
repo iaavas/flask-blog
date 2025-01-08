@@ -1,0 +1,74 @@
+
+
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">Register</h1>
+            <p class="auth-subtitle">Welcome! Register for our blogs.</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('page.register') }}" class="auth-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Username</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="text" 
+                        id="username"
+                        name="username" 
+                        class="form-input"
+                        placeholder="Enter your username"
+                        required
+                        autocomplete="username"
+                        
+                    >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email address</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="email" 
+                        id="email"
+                        name="email" 
+                        class="form-input"
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        class="form-input"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-button">
+                Sign Up
+                
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="{{ url_for('page.login') }}" class="auth-link">Sign up</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

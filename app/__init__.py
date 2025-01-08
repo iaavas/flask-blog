@@ -12,7 +12,7 @@ jwt = JWTManager()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='templates', static_folder='static')
     app.config.from_object("config.Config")
 
     db.init_app(app)
@@ -22,7 +22,9 @@ def create_app():
 
     from app.routes.auth_routes import auth_bp
     from app.routes.blog_routes import blog_bp
-    app.register_blueprint(auth_bp, url_prefix="/auth")
-    app.register_blueprint(blog_bp, url_prefix="/blogs")
+    from app.pages.page_routes import page_bp
+    app.register_blueprint(auth_bp, url_prefix='/api')
+    app.register_blueprint(blog_bp, url_prefix='/api/blogs')
+    app.register_blueprint(page_bp, url_prefix='/')
 
     return app

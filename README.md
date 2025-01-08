@@ -1,32 +1,18 @@
 
 # Blog App with Flask
 
-A simple and efficient blog REST API built using Flask and SQLAlchemy.
-
-## Features
-
-- **User Authentication**: Registration, login, and logout with JWT-based authentication.
-- **CRUD Operations for Blog Posts**: Create, read, update, and delete blog posts.
-- **Pagination**: API support for paginated display of blog posts.
-- **Database Integration**: Uses SQLite
-- **RESTful Architecture**: Clean and scalable API design.
+A simple and efficient  REST API built using Flask and SQLite.
 
 ## Getting Started
 
 Follow these steps to set up and run the application on your local machine.
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip (Python package installer)
-- A database system (SQLite, MySQL, or PostgreSQL)
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/blog-rest-api.git
+   git clone https://github.com/iaavas/blog-flask.git
    cd blog-rest-api
    ```
 
@@ -34,7 +20,7 @@ Follow these steps to set up and run the application on your local machine.
 
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows, use venv\Scripts\activate
+   source venv/bin/activate  
    ```
 
 3. Install the dependencies:
@@ -63,14 +49,14 @@ Follow these steps to set up and run the application on your local machine.
 
 #### Authentication
 
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and retrieve an access token
-- `POST /auth/logout` - Logout the user
+- `POST /api/register` - Register a new user
+- `POST /api/login` - Login and retrieve an access token
+- `POST /api/logout` - Logout the user
 
 #### Blog Posts
 
-- `POST /blogs` - Create a new blog post (requires authentication)
-- `GET /blogs` - Retrieve a paginated list of blog posts
+- `POST /api/blogs` - Create a new blog post (requires authentication)
+- `GET /api/blogs/?page=<number>` - Retrieve a paginated list of blog posts
 - `GET /blogs/<id>` - Retrieve a single blog post by ID
 - `PUT /blogs/<id>` - Update a blog post (requires authentication)
 - `DELETE /blogs/<id>` - Delete a blog post (requires authentication)

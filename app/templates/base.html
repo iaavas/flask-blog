@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-left">
+                <a href="{{ url_for('page.index') }}" class="nav-logo">Blog</a>
+            </div>
+            <div class="nav-right">
+                {% if session.get('user') %}
+                
+                    <span class="welcome-text">Welcome, {{ session['user'] }}</span>
+                    <a href="{{ url_for('page.logout') }}" class="nav-link nav-button">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('page.login') }}" class="nav-link">Login</a>
+                    <a href="{{ url_for('page.register') }}" class="nav-link nav-button">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }} fade-in">
+                            {{ message }}
+                            <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    
+</body>
+</html>
