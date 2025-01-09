@@ -12,8 +12,8 @@ Follow these steps to set up and run the application on your local machine.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/iaavas/blog-flask.git
-   cd blog-rest-api
+   git clone https://github.com/iaavas/flask-blog.git
+   cd flask-blog
    ```
 
 2. Set up a virtual environment:
@@ -57,6 +57,6 @@ Follow these steps to set up and run the application on your local machine.
 
 - `POST /api/blogs` - Create a new blog post (requires authentication)
 - `GET /api/blogs/?page=<number>` - Retrieve a paginated list of blog posts
-- `GET /blogs/<id>` - Retrieve a single blog post by ID
-- `PUT /blogs/<id>` - Update a blog post (requires authentication)
-- `DELETE /blogs/<id>` - Delete a blog post (requires authentication)
+- `GET /api/blogs/<id>` - Retrieve a single blog post by ID
+- `PUT /api/blogs/<id>` - Update a blog post (requires authentication)
+- `DELETE /api/blogs/<id>` - Delete a blog post (requires authentication)
